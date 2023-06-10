@@ -1,0 +1,25 @@
+@relation work
+@attribute id_employee integer
+@attribute name_and_last_name string
+@attribute preferred_working_days integer
+@attribute preferred_work_shift integer
+@attribute job_position string
+@data
+1,'Charmander',12345,1,'Cleaner'
+2,'Butterfree',1234,12,'Sales Manager'
+3,'Pidgey',2345,2,'Cleaner'
+4,'Abra',234,3,'Cleaner'
+5,'Aron',12345,1,'Office Assistant'
+6,'Bastiodon',345,12,'Sales Manager'
+7,'Bellossom',12,2,'Marketing Manager'
+8,'Blacephalon',234,1,'Executive Assistant'
+9,'Buneary',1245,123,'Cleaner'
+10,'Cascoon',245,1,'Cleaner'
+11,'Caterpie',135,12,'Sales Manager'
+12,'Charizard',235,2,'Cleaner'
+13,'Chingling',245,3,'Cleaner'
+14,'Clefairy',1345,1,'Office Assistant'
+15,'Combusken',145,12,'Sales Manager'
+16,'Buizel',134,2,'Marketing Manager'
+17,'Brambleghast',25,1,'Executive Assistant'
+18,'Pikachu',1235,12,'Cleaner'
