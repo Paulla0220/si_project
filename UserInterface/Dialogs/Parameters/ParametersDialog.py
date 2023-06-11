@@ -1,0 +1,66 @@
+# -*- coding: utf-8 -*-
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class ParametersDialog(object):
+    def setupUI(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(756, 275)
+        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
+        self.buttonBox.setGeometry(QtCore.QRect(370, 230, 341, 32))
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName("buttonBox")
+        self.label = QtWidgets.QLabel(Dialog)
+        self.label.setGeometry(QtCore.QRect(10, 10, 451, 21))
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(Dialog)
+        self.label_2.setGeometry(QtCore.QRect(10, 50, 241, 21))
+        self.label_2.setObjectName("label_2")
+        self.lineEdit = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit.setGeometry(QtCore.QRect(280, 50, 441, 21))
+        self.lineEdit.setObjectName("lineEdit")
+        self.label_3 = QtWidgets.QLabel(Dialog)
+        self.label_3.setGeometry(QtCore.QRect(10, 90, 261, 21))
+        self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(Dialog)
+        self.label_4.setGeometry(QtCore.QRect(10, 130, 271, 16))
+        self.label_4.setObjectName("label_4")
+        self.label_5 = QtWidgets.QLabel(Dialog)
+        self.label_5.setGeometry(QtCore.QRect(10, 160, 271, 16))
+        self.label_5.setObjectName("label_5")
+        self.label_6 = QtWidgets.QLabel(Dialog)
+        self.label_6.setGeometry(QtCore.QRect(10, 190, 261, 16))
+        self.label_6.setObjectName("label_6")
+        self.lineEdit_2 = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit_2.setGeometry(QtCore.QRect(280, 90, 441, 21))
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.lineEdit_3 = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit_3.setGeometry(QtCore.QRect(280, 130, 441, 21))
+        self.lineEdit_3.setObjectName("lineEdit_3")
+        self.lineEdit_4 = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit_4.setGeometry(QtCore.QRect(280, 160, 441, 21))
+        self.lineEdit_4.setObjectName("lineEdit_4")
+        self.lineEdit_5 = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit_5.setGeometry(QtCore.QRect(280, 190, 441, 21))
+        self.lineEdit_5.setObjectName("lineEdit_5")
+
+        self.retranslateUi(Dialog)
+        self.buttonBox.accepted.connect(Dialog.accept) # type: ignore
+        self.buttonBox.rejected.connect(Dialog.reject) # type: ignore
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+    def retranslateUi(self, Dialog):
+        _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "Parameters"))
+        self.label.setText(_translate("Dialog", "Set the maximum number of employees on the 3rd shift"))
+        self.label_2.setText(_translate("Dialog", "number of employees on Monday"))
+        self.lineEdit.setPlaceholderText(_translate("Dialog", "default 4"))
+        self.label_3.setText(_translate("Dialog", "number of employees on Tuesday"))
+        self.label_4.setText(_translate("Dialog", "number of employees on Wednesday"))
+        self.label_5.setText(_translate("Dialog", "number of employees on Thursday"))
+        self.label_6.setText(_translate("Dialog", "number of employees on Friday"))
+        self.lineEdit_2.setPlaceholderText(_translate("Dialog", "default 4"))
+        self.lineEdit_3.setPlaceholderText(_translate("Dialog", "default 4"))
+        self.lineEdit_4.setPlaceholderText(_translate("Dialog", "default 4"))
+        self.lineEdit_5.setPlaceholderText(_translate("Dialog", "default 4"))

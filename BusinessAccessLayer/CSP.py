@@ -1,12 +1,17 @@
-from Model.Workschedule import Workschedule
+from Models.Workschedules.Workschedule import Workschedule
 
 class CSP:
-    def __init__(self, employees):
+    def __init__(self, employees, maxNumEmployeesOnMonday, maxNumEmployeesOnTuesday, maxNumEmployeesOnWednesday, maxNumEmployeesOnThursday, maxNumEmployeesOnFriday):
         self.employees = employees
         self.workschedule = Workschedule()
         self._saveStepsDays = []
         self._saveStepsID = []
         self._saveStepsWorkshift = []
+        self.maxNumEmployeesOnMonday = maxNumEmployeesOnMonday + 1
+        self.maxNumEmployeesOnTuesday = maxNumEmployeesOnTuesday + 1
+        self.maxNumEmployeesOnWednesday = maxNumEmployeesOnWednesday + 1
+        self.maxNumEmployeesOnThursday = maxNumEmployeesOnThursday + 1
+        self.maxNumEmployeesOnFriday = maxNumEmployeesOnFriday + 1
 
     @property
     def saveStepsDays(self):
@@ -88,31 +93,31 @@ class CSP:
 
     def CheckEmployeesOn3rdWorkshift(self, workingDay): 
         if workingDay == 'Monday':
-            if self.workschedule.employeesOn3rdworkShitOnMonday < 5:
+            if self.workschedule.employeesOn3rdworkShitOnMonday < self.maxNumEmployeesOnMonday:
                 return True
             else:
                 return False
             
         elif workingDay == 'Wednesday':
-            if self.workschedule.employeesOn3rdworkShitOnWednesday < 5:
+            if self.workschedule.employeesOn3rdworkShitOnWednesday < self.maxNumEmployeesOnWednesday:
                 return True
             else:
                 return False
             
         elif workingDay == 'Tuesday':
-            if self.workschedule.employeesOn3rdworkShitOnTuesday < 5:
+            if self.workschedule.employeesOn3rdworkShitOnTuesday < self.maxNumEmployeesOnTuesday:
                 return True
             else:
                 return False
             
         elif workingDay == 'Thursday':
-            if self.workschedule.employeesOn3rdworkShitOnThursday < 5:
+            if self.workschedule.employeesOn3rdworkShitOnThursday < self.maxNumEmployeesOnThursday:
                 return True
             else:
                 return False
             
         elif workingDay == 'Friday':
-            if self.workschedule.employeesOn3rdworkShitOnFriday < 5:
+            if self.workschedule.employeesOn3rdworkShitOnFriday < self.maxNumEmployeesOnFriday:
                 return True
             else:
                 return False

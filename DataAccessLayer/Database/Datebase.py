@@ -1,5 +1,5 @@
-from DataAccessLayer.FileOperation import FileOperation
-from Model.Employee import Employee
+from DataAccessLayer.FileOperation.FileOperation import FileOperation
+from Models.Employees.Employee import Employee
 import os
 
 class Datebase:

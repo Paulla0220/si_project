@@ -1,4 +1,4 @@
-from Model.Employee import Employee
+from Models.Employees.Employee import Employee
 import arff
 
 class FileOperation:

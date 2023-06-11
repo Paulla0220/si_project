@@ -1,12 +1,12 @@
 from UserInterface.Windows.MainWindow import MainWindow
-from UserInterface.Dialogs.AddEmployeeDialog import AddEmployeeDialog
+from UserInterface.Dialogs.AddEmployee.AddEmployeeDialog import AddEmployeeDialog
+from UserInterface.Dialogs.Parameters.ParametersDialog import ParametersDialog
 from PyQt5.QtWidgets import QMessageBox, QFileDialog, QApplication
 from PyQt5 import QtCore
-from DataAccessLayer.Datebase import Datebase
-from DataAccessLayer.FileOperation import FileOperation
+from DataAccessLayer.Database.Datebase import Datebase
+from DataAccessLayer.FileOperation.FileOperation import FileOperation
 from BusinessAccessLayer.CSP import CSP
 from PyQt5.QtCore import QThread
-from PyQt5.QtGui import QTransform
 
 from PyQt5.QtWidgets import *
 
@@ -34,12 +34,17 @@ class UserInterfaceController(QMainWindow):
         self.friday1stShiftForSteps = []
         self.funFindSolutionUsed = False
         self.funFindSteps = False
+        self.mondayParameter = 4
+        self.tuesdayParameter = 4
+        self.wednesdayParameter = 4
+        self.thursdayParameter = 4
+        self.fridayParameter = 4
 
         # -------------------------------
         self.dateBase = Datebase()
         self.file = FileOperation()
         self.employees = []
-        self.csp = CSP(self.employees)
+        self.csp = CSP(self.employees, 0, 0, 0, 0, 0)
 
         # -------------------------------
         self.mainWindow = MainWindow()
@@ -49,8 +54,13 @@ class UserInterfaceController(QMainWindow):
         self.dialogAE = QDialog(self)
         self.addEmployeeDialog.setupUI(self.dialogAE)
 
+        self.setParameters = ParametersDialog()
+        self.DialogSP = QDialog(self)
+        self.setParameters.setupUI(self.DialogSP)
+
         # reakcja przycisków
         self.mainWindow.pushButton.clicked.connect(self.AddEmployee)
+        self.mainWindow.pushButton_2.clicked.connect(self.SetParameters)
         self.mainWindow.pushButton_8.clicked.connect(self.FindASolution)
         self.mainWindow.pushButton_7.clicked.connect(self.Steps)
 
@@ -63,6 +73,10 @@ class UserInterfaceController(QMainWindow):
     def AddEmployee(self):
         self.addEmployeeDialog.buttonBox.accepted.connect(self.SaveDataToDateBaseFromDialog)
         self.dialogAE.exec_()
+    
+    def SetParameters(self):
+        self.setParameters.buttonBox.accepted.connect(self.GetValuesParameters)
+        self.DialogSP.exec_()
 
     def LoadDatabaseFromFile(self):
         fileDialog = QFileDialog(self)
@@ -128,6 +142,49 @@ class UserInterfaceController(QMainWindow):
                  QMessageBox.critical(fileDialog, "Error", "Error writing to file: " + str(error), QMessageBox.Close)
 
     # ----------------------------------------------------------------------------
+    def GetValuesParameters(self):
+        self.mondayParameter = self.setParameters.lineEdit.text()
+        self.tuesdayParameter = self.setParameters.lineEdit_2.text()
+        self.wednesdayParameter = self.setParameters.lineEdit_3.text()
+        self.thursdayParameter = self.setParameters.lineEdit_4.text()
+        self.fridayParameter = self.setParameters.lineEdit_5.text()
+        if (not (self.mondayParameter.isdigit() and int(self.mondayParameter) > -1)):
+            QMessageBox.critical(None, "Error", "Bad value - the values have been set to default values", QMessageBox.Ok)
+            self.mondayParameter = 4
+            self.tuesdayParameter = 4
+            self.wednesdayParameter = 4
+            self.thursdayParameter = 4
+            self.fridayParameter = 4
+        elif (not (self.tuesdayParameter.isdigit() and int(self.tuesdayParameter) > -1)):
+            QMessageBox.critical(None, "Error", "Bad value - the values have been set to default values", QMessageBox.Ok)
+            self.mondayParameter = 4
+            self.tuesdayParameter = 4
+            self.wednesdayParameter = 4
+            self.thursdayParameter = 4
+            self.fridayParameter = 4
+        elif (not (self.wednesdayParameter.isdigit() and int(self.wednesdayParameter) > -1)):
+            QMessageBox.critical(None, "Error", "Bad value - the values have been set to default values", QMessageBox.Ok)
+            self.mondayParameter = 4
+            self.tuesdayParameter = 4
+            self.wednesdayParameter = 4
+            self.thursdayParameter = 4
+            self.fridayParameter = 4
+        elif (not (self.thursdayParameter.isdigit() and int(self.thursdayParameter) > -1)):
+            QMessageBox.critical(None, "Error", "Bad value - the values have been set to default values", QMessageBox.Ok)
+            self.mondayParameter = 4
+            self.tuesdayParameter = 4
+            self.wednesdayParameter = 4
+            self.thursdayParameter = 4
+            self.fridayParameter = 4
+        elif (not (self.fridayParameter.isdigit() and int(self.fridayParameter) > -1)):
+            QMessageBox.critical(None, "Error", "Bad value - the values have been set to default values", QMessageBox.Ok)
+            self.mondayParameter = 4
+            self.tuesdayParameter = 4
+            self.wednesdayParameter = 4
+            self.thursdayParameter = 4
+            self.fridayParameter = 4
+            
+
     def SaveDataToDateBaseFromDialog(self):
         length = len(self.addEmployeeDialog.lineEdit.text().split(";"))
         name = self.addEmployeeDialog.lineEdit.text().split(";")
@@ -352,89 +409,17 @@ class UserInterfaceController(QMainWindow):
             line12.setFixedSize(2,13)
             line12.setStyleSheet(styleLine)
             line12.setGeometry(286,210,400,400)
-            line7 = QLabel()
-            line7.setFixedSize(2,13)
-            line7.setStyleSheet(styleLine)
-            line7.setGeometry(286,420,400,400)
-            line13 = QLabel()
-            line13.setFixedSize(2,13)
-            line13.setStyleSheet(styleLine)
-            line13.setGeometry(286,630,400,400)
-            line14 = QLabel()
-            line14.setFixedSize(2,12)
-            line14.setStyleSheet(styleLine)
-            line14.setGeometry(286,840,400,400)
-            line16 = QLabel()
-            line16.setFixedSize(2,12)
-            line16.setStyleSheet(styleLine)
-            line16.setGeometry(666,840,400,400)
-            line17 = QLabel()
-            line17.setFixedSize(2,13)
-            line17.setStyleSheet(styleLine)
-            line17.setGeometry(666,210,400,400)
-            line18 = QLabel()
-            line18.setFixedSize(2,13)
-            line18.setStyleSheet(styleLine)
-            line18.setGeometry(666,420,400,400)
-            line19 = QLabel()
-            line19.setFixedSize(2,13)
-            line19.setStyleSheet(styleLine)
-            line19.setGeometry(666,630,400,400)
-            line20 = QLabel()
-            line20.setFixedSize(2,12)
-            line20.setStyleSheet(styleLine)
-            line20.setGeometry(1049,840,400,400)
-            line21 = QLabel()
-            line21.setFixedSize(2,13)
-            line21.setStyleSheet(styleLine)
-            line21.setGeometry(1049,210,400,400)
-            line22 = QLabel()
-            line22.setFixedSize(2,13)
-            line22.setStyleSheet(styleLine)
-            line22.setGeometry(1049,420,400,400)
-            line23 = QLabel()
-            line23.setFixedSize(2,13)
-            line23.setStyleSheet(styleLine)
-            line23.setGeometry(1049,630,400,400)
             layoutScroll.addChildWidget(line1)
             layoutScroll.addChildWidget(line2)
             layoutScroll.addChildWidget(line3)
             layoutScroll.addChildWidget(line4)
             layoutScroll.addChildWidget(line5)
             layoutScroll.addChildWidget(line6)
-            layoutScroll.addChildWidget(line7)
             layoutScroll.addChildWidget(line8)
             layoutScroll.addChildWidget(line9)
             layoutScroll.addChildWidget(line10)
-            layoutScroll.addChildWidget(line11)
-            layoutScroll.addChildWidget(line12)
-            layoutScroll.addChildWidget(line13)
-            layoutScroll.addChildWidget(line14)
             layoutScroll.addChildWidget(line15)
-            layoutScroll.addChildWidget(line16)
-            layoutScroll.addChildWidget(line17)
-            layoutScroll.addChildWidget(line18)
-            layoutScroll.addChildWidget(line19)
-            layoutScroll.addChildWidget(line20)
-            layoutScroll.addChildWidget(line21)
-            layoutScroll.addChildWidget(line22)
-            layoutScroll.addChildWidget(line23)
             self.mainWindow.scrollArea_2.setWidget(areaScroll)
-            label1.show()
-            label2.show()
-            label3.show()
-            label4.show()
-            label5.show()
-            label6.show()
-            label7.show()
-            label8.show()
-            label9.show()
-            label10.show()
-            label11.show()
-            label12.show()
-            label13.show()
-            label14.show()
-            label15.show()
 
     def UpdateGraphForSteps(self, day, id, workshift):
         if day == 'Monday' and workshift == 3:
@@ -610,7 +595,7 @@ class UserInterfaceController(QMainWindow):
         QThread.msleep(1000) 
 
     def FindASolution(self):
-        csp2 = CSP(self.csp.employees)
+        csp2 = CSP(self.csp.employees, int(self.mondayParameter), int(self.tuesdayParameter), int(self.wednesdayParameter), int(self.thursdayParameter), int(self.fridayParameter))
         obj = csp2.GenerateWorkschedule()
         if obj == 'There is no data in the database':
                 QMessageBox.information(None, "Steps", "There is no data in the database", QMessageBox.Ok)
@@ -655,7 +640,7 @@ class UserInterfaceController(QMainWindow):
             QMessageBox.critical(None, "Error", "Bad value", QMessageBox.Ok)
         else:
             self.funFindSteps = True
-            csp2 = CSP(self.csp.employees)
+            csp2 = CSP(self.csp.employees, int(self.mondayParameter), int(self.tuesdayParameter), int(self.wednesdayParameter), int(self.thursdayParameter), int(self.fridayParameter))
             obj = csp2.GenerateWorkschedule()
             if obj == 'There is no data in the database':
                  QMessageBox.information(None, "Steps", "There is no data in the database", QMessageBox.Ok)
