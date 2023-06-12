@@ -7,11 +7,11 @@ class CSP:
         self._saveStepsDays = []
         self._saveStepsID = []
         self._saveStepsWorkshift = []
-        self.maxNumEmployeesOnMonday = maxNumEmployeesOnMonday + 1
-        self.maxNumEmployeesOnTuesday = maxNumEmployeesOnTuesday + 1
-        self.maxNumEmployeesOnWednesday = maxNumEmployeesOnWednesday + 1
-        self.maxNumEmployeesOnThursday = maxNumEmployeesOnThursday + 1
-        self.maxNumEmployeesOnFriday = maxNumEmployeesOnFriday + 1
+        self.maxNumEmployeesOnMonday = maxNumEmployeesOnMonday
+        self.maxNumEmployeesOnTuesday = maxNumEmployeesOnTuesday
+        self.maxNumEmployeesOnWednesday = maxNumEmployeesOnWednesday
+        self.maxNumEmployeesOnThursday = maxNumEmployeesOnThursday
+        self.maxNumEmployeesOnFriday = maxNumEmployeesOnFriday
 
     @property
     def saveStepsDays(self):
